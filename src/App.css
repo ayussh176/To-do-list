@@ -1,0 +1,725 @@
+/* General Styles */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  transition: background 0.3s, color 0.3s;
+  background: #f4f4f9; /* Default light theme background */
+  color: #333; /* Default light theme text color */
+}
+
+/* Light Theme */
+.app {
+  min-height: 100vh;
+  text-align: center;
+}
+
+/* Dark Theme */
+.app.dark {
+  background: #222;
+  color: #fff;
+}
+
+/* Header & Navigation Bar */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background: white; /* Header background for light theme */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.app.dark header {
+  background: #333; /* Header background for dark theme */
+  color: #fff;
+}
+
+.header-left h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  color: #333;
+  font-weight: 600;
+}
+
+.app.dark .header-left h1 {
+  color: #fff;
+}
+
+.navbar {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.navbar-button {
+  background: none;
+  border: none;
+  color: #555;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 8px 15px;
+  border-radius: 8px; /* Slightly more rounded */
+  transition: background 0.2s, color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.app.dark .navbar-button {
+  color: #ccc;
+}
+
+.navbar-button:hover {
+  background: #e0e0e0;
+  color: #007bff;
+}
+
+.app.dark .navbar-button:hover {
+  background: #555;
+  color: #90cdf4;
+}
+
+.navbar-button.active {
+  background: #e0e0e0;
+  color: #007bff;
+  font-weight: 600;
+}
+
+.app.dark .navbar-button.active {
+  background: #555;
+  color: #90cdf4;
+}
+
+.theme-toggle {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #555; /* Default color for theme toggle */
+  margin-left: 15px;
+}
+
+.app.dark .theme-toggle {
+  color: #ccc;
+}
+
+/* Home Page Specific Styles */
+.home-container {
+  padding: 20px;
+  max-width: 1200px; /* Wider for home page content */
+  margin: 0 auto;
+}
+
+.welcome-section {
+  margin-bottom: 40px;
+  padding: 20px;
+}
+
+.welcome-section h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.app.dark .welcome-section h2 {
+  color: #fff;
+}
+
+.welcome-section p {
+  font-size: 1.1rem;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+.app.dark .welcome-section p {
+  color: #ccc;
+}
+
+.feature-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-bottom: 50px;
+  justify-content: center;
+}
+
+.feature-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.app.dark .feature-card {
+  background: #444;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+}
+
+.app.dark .feature-card:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.feature-card .icon {
+  font-size: 3.5rem; /* Larger icons */
+  color: #007bff; /* Blue for icons */
+  margin-bottom: 20px;
+}
+
+.app.dark .feature-card .icon {
+  color: #90cdf4;
+}
+
+.feature-card h3 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.app.dark .feature-card h3 {
+  color: #fff;
+}
+
+.feature-card p {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 25px;
+  flex-grow: 1; /* Allows description to take available space */
+}
+
+.app.dark .feature-card p {
+  color: #ccc;
+}
+
+.feature-card button {
+  background: #333; /* Dark button for 'Get Started' */
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background 0.2s;
+  width: 100%; /* Full width button */
+  max-width: 180px; /* Max width for consistency */
+}
+
+.app.dark .feature-card button {
+  background: #007bff; /* Blue button for dark mode 'Get Started' */
+}
+
+.feature-card button:hover {
+  background: #007bff; /* Blue hover for light theme */
+}
+
+.app.dark .feature-card button:hover {
+  background: #0056b3; /* Darker blue hover for dark theme */
+}
+
+.call-to-action-section {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+  padding: 40px 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  margin-bottom: 40px; /* Added margin-bottom */
+}
+
+.app.dark .call-to-action-section {
+  background: #444;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.call-to-action-section h3 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.app.dark .call-to-action-section h3 {
+  color: #fff;
+}
+
+.call-to-action-section p {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.app.dark .call-to-action-section p {
+  color: #ccc;
+}
+
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.cta-buttons button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cta-buttons button:hover {
+  background: #0056b3;
+}
+
+/* General Container Styles (For TodoList, NotesSection, PlannerSection) */
+.todo-container,
+.notes-container,
+.planner-container {
+  max-width: 900px; /* Slightly wider for content pages */
+  margin: 20px auto;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  text-align: left;
+}
+
+.app.dark .todo-container,
+.app.dark .notes-container,
+.app.dark .planner-container {
+  background: #333;
+  color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.todo-container h2,
+.notes-container h2,
+.planner-container h2 {
+    font-size: 2rem;
+    margin-top: 0;
+    margin-bottom: 25px;
+    color: #333;
+    text-align: center;
+}
+.app.dark .todo-container h2,
+.app.dark .notes-container h2,
+.app.dark .planner-container h2 {
+    color: #fff;
+}
+
+
+/* Input and Button Styles */
+.task-input, .notes-input, .planner-input {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  align-items: center; /* Align items for better input layout */
+}
+
+.task-input input,
+.notes-input input[type="text"],
+.notes-input textarea,
+.planner-input input {
+  padding: 12px;
+  flex: 1;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-sizing: border-box; /* Include padding in width */
+}
+
+.app.dark .task-input input,
+.app.dark .notes-input input,
+.app.dark .notes-input textarea,
+.app.dark .planner-input input {
+    background: #555;
+    color: #fff;
+    border-color: #666;
+}
+
+.task-input button,
+.notes-input button,
+.planner-input button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.task-input button:hover,
+.notes-input button:hover,
+.planner-input button:hover {
+  background: #0056b3;
+}
+
+/* List Item Styles */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f9f9f9;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+}
+
+.app.dark li {
+  background: #444;
+  border-color: #555;
+  color: #fff;
+}
+
+li.completed {
+  text-decoration: line-through;
+  color: #999;
+  background: #f0f0f0;
+}
+
+.app.dark li.completed {
+  color: #aaa;
+  background: #555;
+}
+
+li input[type="checkbox"] {
+    margin-right: 15px;
+    width: 18px;
+    height: 18px;
+}
+
+li span {
+    flex-grow: 1;
+    font-size: 1.05rem;
+}
+
+.task-date {
+  font-size: 0.9rem;
+  margin-left: 20px;
+  color: #888;
+  white-space: nowrap; /* Prevent date from wrapping */
+}
+
+.app.dark .task-date {
+    color: lightgray;
+}
+
+/* Notes Section Specific Styles */
+.notes-input textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.note-item {
+    background: #f9f9f9;
+    padding: 18px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    position: relative;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+}
+
+.app.dark .note-item {
+    background: #4a4a4a;
+    border-color: #555;
+}
+
+.note-item h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.4rem;
+    color: #333;
+}
+.app.dark .note-item h3 {
+    color: #fff;
+}
+
+.note-item p {
+    color: #555;
+    white-space: pre-wrap; /* Preserve line breaks in notes */
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+.app.dark .note-item p {
+    color: #ccc;
+}
+
+.note-item .note-date {
+    font-size: 0.85rem;
+    color: #888;
+    display: block;
+    margin-bottom: 15px;
+}
+.app.dark .note-item .note-date {
+    color: lightgray;
+}
+
+.note-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end; /* Align buttons to the right */
+}
+
+.note-actions button {
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.note-actions button.edit {
+    background: #ffc107;
+    color: black;
+}
+.note-actions button.edit:hover {
+    background: #e0a800;
+}
+.note-actions button.delete {
+    background: #dc3545;
+    color: white;
+}
+.note-actions button.delete:hover {
+    background: #c82333;
+}
+
+
+/* Planner Section Specific Styles */
+.planner-event {
+    background: #e9f5ff;
+    padding: 18px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #cce5ff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+}
+
+.app.dark .planner-event {
+    background: #3a475d;
+    border-color: #4c5d75;
+}
+
+.planner-event h3 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 1.4rem;
+    color: #007bff;
+}
+.app.dark .planner-event h3 {
+    color: #90cdf4;
+}
+
+.planner-event p {
+    margin: 5px 0;
+    color: #333;
+}
+.app.dark .planner-event p {
+    color: #ccc;
+}
+
+.planner-event .event-date-time {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 10px;
+    display: block;
+    margin-bottom: 15px;
+}
+.app.dark .planner-event .event-date-time {
+    color: lightgray;
+}
+
+.planner-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.planner-actions button {
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px;
+    }
+
+    .navbar {
+        margin-top: 15px;
+        flex-wrap: wrap; /* Allow navigation buttons to wrap */
+        justify-content: center;
+        width: 100%;
+    }
+
+    .navbar-button {
+        flex-grow: 1; /* Allow buttons to expand */
+        text-align: center;
+        justify-content: center;
+    }
+
+    .header-left {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .header-left h1 {
+        font-size: 1.5rem;
+    }
+
+    .theme-toggle {
+        margin-left: 0; /* Remove left margin on smaller screens */
+    }
+
+    .welcome-section h2 {
+        font-size: 2rem;
+    }
+
+    .feature-cards-grid {
+        grid-template-columns: 1fr; /* Stack cards on small screens */
+    }
+
+    .call-to-action-section {
+        padding: 30px 15px;
+    }
+
+    .cta-buttons {
+        flex-direction: column; /* Stack CTA buttons on small screens */
+        gap: 15px;
+    }
+
+    .cta-buttons button {
+        width: 100%;
+        max-width: 250px; /* Limit width of stacked buttons */
+    }
+
+    .todo-container, .notes-container, .planner-container {
+        padding: 20px;
+    }
+
+    .task-input, .notes-input, .planner-input {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .task-input input,
+    .notes-input input[type="text"],
+    .notes-input textarea,
+    .planner-input input {
+        width: 100%;
+    }
+
+    .task-input button,
+    .notes-input button,
+    .planner-input button {
+        width: 100%;
+        max-width: 200px;
+    }
+
+    .note-actions, .planner-actions {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-end;
+    }
+
+    .note-actions button, .planner-actions button {
+        width: auto; /* Adjust width for stacked actions */
+        align-self: flex-end;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-left h1 {
+        font-size: 1.3rem;
+    }
+    .theme-toggle {
+        font-size: 1.3rem;
+    }
+    .welcome-section h2 {
+        font-size: 1.8rem;
+    }
+    .welcome-section p {
+        font-size: 0.95rem;
+    }
+    .feature-card h3 {
+        font-size: 1.4rem;
+    }
+    .feature-card p {
+        font-size: 0.9rem;
+    }
+    .feature-card button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    .call-to-action-section h3 {
+        font-size: 1.6rem;
+    }
+    .call-to-action-section p {
+        font-size: 0.95rem;
+    }
+    .cta-buttons button {
+        font-size: 1rem;
+        padding: 12px 25px;
+    }
+    .todo-container, .notes-container, .planner-container {
+        padding: 15px;
+    }
+    li {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    li input[type="checkbox"] {
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+    .task-date {
+        margin-left: 0;
+        align-self: flex-end;
+    }
+}
