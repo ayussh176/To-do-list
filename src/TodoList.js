@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import TaskItem from "./TaskItem";
 import { FaPlus } from "react-icons/fa";
-import FilterSort from "./FilterSort"; // Assuming FilterSort will be used
 
 function TodoList() {
     const [tasks, setTasks] = useState([]);
     const [taskText, setTaskText] = useState("");
     const [taskDate, setTaskDate] = useState("");
-    const [filter, setFilter] = useState("all"); // State for filter
-    const [sort, setSort] = useState("date");   // State for sort
 
     const addTask = () => {
         if (taskText.trim() === "" || taskDate.trim() === "") return;
@@ -16,24 +13,6 @@ function TodoList() {
         setTaskText("");
         setTaskDate("");
     };
-
-    // Filter and sort logic (simplified for demonstration)
-    const filteredTasks = tasks.filter(task => {
-        if (filter === "completed") return task.completed;
-        if (filter === "pending") return !task.completed;
-        return true;
-    });
-
-    const sortedTasks = [...filteredTasks].sort((a, b) => {
-        if (sort === "date") {
-            return new Date(a.date) - new Date(b.date);
-        }
-        if (sort === "name") {
-            return a.text.localeCompare(b.text);
-        }
-        return 0;
-    });
-
 
     return (
         <div className="todo-container">
@@ -52,13 +31,11 @@ function TodoList() {
                 />
                 <button onClick={addTask}><FaPlus /> Add Task</button>
             </div>
-            {/* You can integrate FilterSort here */}
-            {/* <FilterSort setFilter={setFilter} setSort={setSort} /> */}
             <ul>
-                {sortedTasks.length === 0 ? (
+                {tasks.length === 0 ? (
                     <p style={{ textAlign: 'center', color: 'gray' }}>No tasks yet. Add one above!</p>
                 ) : (
-                    sortedTasks.map(task => (
+                    tasks.map(task => (
                         <TaskItem key={task.id} task={task} setTasks={setTasks} tasks={tasks} />
                     ))
                 )}

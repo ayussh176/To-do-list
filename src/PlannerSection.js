@@ -24,7 +24,7 @@ function PlannerSection() {
 
     return (
         <div className="planner-container">
-            <h2>Your Planner</h2> {/* Added title */}
+            <h2>Your Planner</h2>
             <div className="planner-input">
                 <input
                     type="text"

@@ -2,19 +2,18 @@ import React, { useState } from "react";
 import TodoList from "./TodoList";
 import NotesSection from "./NotesSection";
 import PlannerSection from "./PlannerSection";
-import HomePage from "./HomePage"; // New import for HomePage
-import { FaSun, FaMoon, FaHome, FaListAlt, FaStickyNote, FaCalendarAlt } from "react-icons/fa"; // Added icons
+import HomePage from "./HomePage";
+import { FaSun, FaMoon, FaHome, FaListAlt, FaStickyNote, FaCalendarAlt } from "react-icons/fa";
 import "./App.css";
 
 function App() {
     const [darkMode, setDarkMode] = useState(false);
-    const [activeSection, setActiveSection] = useState("home"); // Set initial section to "home"
+    const [activeSection, setActiveSection] = useState("home");
 
     // Function to render the active section component
     const renderSection = () => {
         switch (activeSection) {
             case "home":
-                // Pass setActiveSection to HomePage so it can navigate
                 return <HomePage setActiveSection={setActiveSection} />;
             case "todo":
                 return <TodoList />;
@@ -23,7 +22,7 @@ function App() {
             case "planner":
                 return <PlannerSection />;
             default:
-                return <HomePage setActiveSection={setActiveSection} />; // Fallback to home
+                return <HomePage setActiveSection={setActiveSection} />;
         }
     };
 
