@@ -10,7 +10,8 @@ import {
     onSnapshot,
     addDoc,
     deleteDoc,
-    serverTimestamp // Import serverTimestamp
+    doc, // <--- ADDED THIS IMPORT!
+    serverTimestamp
 } from "firebase/firestore";
 
 function PlannerSection() {
@@ -70,6 +71,7 @@ function PlannerSection() {
 
     const deleteEvent = async (id) => {
         try {
+            // Line 73: doc is now correctly defined here
             await deleteDoc(doc(db, "events", id)); // Delete from 'events' collection
         } catch (e) {
             console.error("Error deleting document: ", e);
@@ -79,7 +81,7 @@ function PlannerSection() {
     if (loading) {
         return (
             <div className="planner-container">
-                <p style={{ textAlign: 'center', color: 'gray' }}>Loading events...</p>
+                <p style={{ textAlign: 'center', color: "gray" }}>Loading events...</p>
             </div>
         );
     }
@@ -103,7 +105,7 @@ function PlannerSection() {
             </div>
             <div className="planner-list">
                 {events.length === 0 ? (
-                    <p style={{ textAlign: 'center', color: 'gray' }}>No events planned yet. Add one above!</p>
+                    <p style={{ textAlign: 'center', color: "gray" }}>No events planned yet. Add one above!</p>
                 ) : (
                     events.map(event => (
                         <div key={event.id} className="planner-event">
