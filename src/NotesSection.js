@@ -1,27 +1,82 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaPlus, FaEdit, FaTrash } from "react-icons/fa";
+import { db } from "./firebaseConfig"; // Import db
+import { useAuth } from "./AuthContext"; // Import useAuth
+import {
+    collection,
+    query,
+    where,
+    orderBy,
+    onSnapshot,
+    addDoc,
+    updateDoc,
+    doc,
+    deleteDoc,
+    serverTimestamp // Import serverTimestamp
+} from "firebase/firestore";
 
 function NotesSection() {
+    const { currentUser } = useAuth(); // Get current user
     const [notes, setNotes] = useState([]);
     const [noteTitle, setNoteTitle] = useState("");
     const [noteContent, setNoteContent] = useState("");
     const [editingNoteId, setEditingNoteId] = useState(null);
+    const [loading, setLoading] = useState(true);
 
-    const addNote = () => {
-        if (noteTitle.trim() === "" || noteContent.trim() === "") return;
-        const newNote = {
-            id: Date.now(),
-            title: noteTitle,
-            content: noteContent,
-            date: new Date().toLocaleString()
-        };
-        setNotes([...notes, newNote]);
-        setNoteTitle("");
-        setNoteContent("");
+    // Fetch notes from Firestore
+    useEffect(() => {
+        if (!currentUser) {
+            setNotes([]); // Clear notes if no user logged in
+            setLoading(false);
+            return;
+        }
+
+        setLoading(true);
+        const notesCollectionRef = collection(db, "notes");
+        const q = query(
+            notesCollectionRef,
+            where("userId", "==", currentUser.uid), // Filter by user ID
+            orderBy("createdAt", "desc") // Order by creation time
+        );
+
+        const unsubscribe = onSnapshot(q, (snapshot) => {
+            const notesData = snapshot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data()
+            }));
+            setNotes(notesData);
+            setLoading(false);
+        }, (error) => {
+            console.error("Error fetching notes: ", error);
+            setLoading(false);
+        });
+
+        return () => unsubscribe(); // Cleanup listener
+    }, [currentUser]);
+
+    const addNote = async () => {
+        if (noteTitle.trim() === "" || noteContent.trim() === "" || !currentUser) return;
+
+        try {
+            await addDoc(collection(db, "notes"), {
+                userId: currentUser.uid, // Store user ID
+                title: noteTitle,
+                content: noteContent,
+                createdAt: serverTimestamp() // Add timestamp
+            });
+            setNoteTitle("");
+            setNoteContent("");
+        } catch (e) {
+            console.error("Error adding document: ", e);
+        }
     };
 
-    const deleteNote = (id) => {
-        setNotes(notes.filter(note => note.id !== id));
+    const deleteNote = async (id) => {
+        try {
+            await deleteDoc(doc(db, "notes", id));
+        } catch (e) {
+            console.error("Error deleting document: ", e);
+        }
     };
 
     const startEditing = (note) => {
@@ -30,17 +85,30 @@ function NotesSection() {
         setNoteContent(note.content);
     };
 
-    const saveEdit = () => {
-        if (noteTitle.trim() === "" || noteContent.trim() === "") return;
-        setNotes(notes.map(note =>
-            note.id === editingNoteId
-                ? { ...note, title: noteTitle, content: noteContent, date: new Date().toLocaleString() }
-                : note
-        ));
-        setEditingNoteId(null);
-        setNoteTitle("");
-        setNoteContent("");
+    const saveEdit = async () => {
+        if (noteTitle.trim() === "" || noteContent.trim() === "" || !currentUser) return;
+
+        try {
+            await updateDoc(doc(db, "notes", editingNoteId), {
+                title: noteTitle,
+                content: noteContent,
+                updatedAt: serverTimestamp() // Add an updated timestamp
+            });
+            setEditingNoteId(null);
+            setNoteTitle("");
+            setNoteContent("");
+        } catch (e) {
+            console.error("Error updating document: ", e);
+        }
     };
+
+    if (loading) {
+        return (
+            <div className="notes-container">
+                <p style={{ textAlign: 'center', color: 'gray' }}>Loading notes...</p>
+            </div>
+        );
+    }
 
     return (
         <div className="notes-container">
@@ -71,7 +139,9 @@ function NotesSection() {
                         <div key={note.id} className="note-item">
                             <h3>{note.title}</h3>
                             <p>{note.content}</p>
-                            <span className="note-date">{note.date}</span>
+                            {/* Display creation/update time, if available */}
+                            {note.createdAt && <span className="note-date">Created: {new Date(note.createdAt.toDate()).toLocaleString()}</span>}
+                            {note.updatedAt && <span className="note-date">Updated: {new Date(note.updatedAt.toDate()).toLocaleString()}</span>}
                             <div className="note-actions">
                                 <button className="edit" onClick={() => startEditing(note)}><FaEdit /> Edit</button>
                                 <button className="delete" onClick={() => deleteNote(note.id)}><FaTrash /> Delete</button>
