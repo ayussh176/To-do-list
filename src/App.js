@@ -1,17 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react"; // Import useEffect
 import TodoList from "./TodoList";
-import NotesSection from "./NotesSection";
-import PlannerSection from "./PlannerSection";
-import HomePage from "./HomePage";
-import { FaSun, FaMoon, FaHome, FaListAlt, FaStickyNote, FaCalendarAlt } from "react-icons/fa";
+import Auth from "./Auth";
+import HomePage from "./HomePage"; // Import HomePage
+import NotesSection from "./NotesSection"; // Import NotesSection
+import PlannerSection from "./PlannerSection"; // Import PlannerSection
+import { AuthProvider, useAuth } from "./AuthContext";
+import { FaSun, FaMoon, FaSignOutAlt } from "react-icons/fa";
 import "./App.css";
 
-function App() {
+function AppContent() {
+    const { currentUser, logout } = useAuth();
     const [darkMode, setDarkMode] = useState(false);
-    const [activeSection, setActiveSection] = useState("home");
+    // State to manage which section is active: 'home', 'todo', 'notes', 'planner'
+    const [activeSection, setActiveSection] = useState("home"); // Default to 'home'
 
-    // Function to render the active section component
+    // Effect to redirect to home page after successful login
+    useEffect(() => {
+        if (currentUser) {
+            setActiveSection("home");
+        } else {
+            // If user logs out or is not logged in, reset to home or auth
+            setActiveSection("home"); // Can also set to 'auth' if you want a blank page before login
+        }
+    }, [currentUser]); // Run this effect when currentUser changes
+
+    const handleLogout = async () => {
+        try {
+            await logout();
+            setActiveSection("home"); // Go back to home/login page after logout
+        } catch (error) {
+            console.error("Failed to log out:", error);
+            alert("Failed to log out.");
+        }
+    };
+
     const renderSection = () => {
+        if (!currentUser) {
+            return <Auth />; // Show Auth component if no user is logged in
+        }
+
         switch (activeSection) {
             case "home":
                 return <HomePage setActiveSection={setActiveSection} />;
@@ -33,37 +60,56 @@ function App() {
                     <h1>ProductivityHub</h1>
                 </div>
                 <nav className="navbar">
-                    <button
-                        className={`navbar-button ${activeSection === "home" ? "active" : ""}`}
-                        onClick={() => setActiveSection("home")}
-                    >
-                        <FaHome /> Home
-                    </button>
-                    <button
-                        className={`navbar-button ${activeSection === "todo" ? "active" : ""}`}
-                        onClick={() => setActiveSection("todo")}
-                    >
-                        <FaListAlt /> To-Do List
-                    </button>
-                    <button
-                        className={`navbar-button ${activeSection === "notes" ? "active" : ""}`}
-                        onClick={() => setActiveSection("notes")}
-                    >
-                        <FaStickyNote /> Notes
-                    </button>
-                    <button
-                        className={`navbar-button ${activeSection === "planner" ? "active" : ""}`}
-                        onClick={() => setActiveSection("planner")}
-                    >
-                        <FaCalendarAlt /> Planner
-                    </button>
+                    {currentUser && ( // Only show navigation if logged in
+                        <>
+                            <button
+                                className={`navbar-button ${activeSection === "home" ? "active" : ""}`}
+                                onClick={() => setActiveSection("home")}
+                            >
+                                Home
+                            </button>
+                            <button
+                                className={`navbar-button ${activeSection === "todo" ? "active" : ""}`}
+                                onClick={() => setActiveSection("todo")}
+                            >
+                                To-Do List
+                            </button>
+                            <button
+                                className={`navbar-button ${activeSection === "notes" ? "active" : ""}`}
+                                onClick={() => setActiveSection("notes")}
+                            >
+                                Notes
+                            </button>
+                            <button
+                                className={`navbar-button ${activeSection === "planner" ? "active" : ""}`}
+                                onClick={() => setActiveSection("planner")}
+                            >
+                                Planner
+                            </button>
+                        </>
+                    )}
                 </nav>
-                <button className="theme-toggle" onClick={() => setDarkMode(!darkMode)}>
-                    {darkMode ? <FaSun /> : <FaMoon />}
-                </button>
+                <div className="header-right">
+                    <button className="theme-toggle" onClick={() => setDarkMode(!darkMode)}>
+                        {darkMode ? <FaSun /> : <FaMoon />}
+                    </button>
+                    {currentUser && ( // Only show logout if logged in
+                        <button className="navbar-button" onClick={handleLogout}>
+                            <FaSignOutAlt /> Logout
+                        </button>
+                    )}
+                </div>
             </header>
             {renderSection()}
         </div>
+    );
+}
+
+function App() {
+    return (
+        <AuthProvider>
+            <AppContent />
+        </AuthProvider>
     );
 }
 

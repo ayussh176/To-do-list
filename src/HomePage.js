@@ -1,10 +1,9 @@
 import React from "react";
-import { FaListAlt, FaStickyNote, FaCalendarAlt, FaPlus } from "react-icons/fa"; // Icons for features and CTA
+import { FaListAlt, FaStickyNote, FaCalendarAlt, FaPlus } from "react-icons/fa";
 
-function HomePage({ setActiveSection }) {
+function HomePage({ setActiveSection }) { // Accepts setActiveSection as a prop
     return (
         <div className="home-container">
-            {/* Welcome Section */}
             <section className="welcome-section">
                 <h2>Welcome to ProductivityHub</h2>
                 <p>
@@ -13,9 +12,7 @@ function HomePage({ setActiveSection }) {
                 </p>
             </section>
 
-            {/* Feature Cards Grid */}
             <section className="feature-cards-grid">
-                {/* To-Do List Card */}
                 <div className="feature-card">
                     <FaListAlt className="icon" />
                     <h3>Todo List</h3>
@@ -23,7 +20,6 @@ function HomePage({ setActiveSection }) {
                     <button onClick={() => setActiveSection("todo")}>Get Started</button>
                 </div>
 
-                {/* Notes Card */}
                 <div className="feature-card">
                     <FaStickyNote className="icon" />
                     <h3>Notes</h3>
@@ -31,7 +27,6 @@ function HomePage({ setActiveSection }) {
                     <button onClick={() => setActiveSection("notes")}>Get Started</button>
                 </div>
 
-                {/* Planner Card */}
                 <div className="feature-card">
                     <FaCalendarAlt className="icon" />
                     <h3>Planner</h3>
@@ -40,7 +35,6 @@ function HomePage({ setActiveSection }) {
                 </div>
             </section>
 
-            {/* Call to Action Section */}
             <section className="call-to-action-section">
                 <h3>Ready to boost your productivity?</h3>
                 <p>Start by creating your first task, note, or event.</p>

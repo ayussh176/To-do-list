@@ -1,0 +1,125 @@
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 80px); /* Adjust based on header height */
+    padding: 20px;
+}
+
+.auth-card {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.app.dark .auth-card {
+    background: #444;
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.auth-card h2 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 2rem;
+    color: #333;
+}
+
+.app.dark .auth-card h2 {
+    color: #fff;
+}
+
+.auth-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+}
+
+.app.dark .auth-error {
+    background-color: #5c1b1f;
+    color: #ffcccc;
+    border-color: #8a3439;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #555;
+}
+
+.app.dark .form-group label {
+    color: #ccc;
+}
+
+.form-group input {
+    width: calc(100% - 24px); /* Account for padding */
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box; /* Include padding in element's total width and height */
+}
+
+.app.dark .form-group input {
+    background: #555;
+    color: #fff;
+    border-color: #666;
+}
+
+.auth-card button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: background 0.2s ease-in-out;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.auth-card button:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+}
+
+.auth-card button:hover:not(:disabled) {
+    background: #0056b3;
+}
+
+.auth-toggle {
+    margin-top: 25px;
+    font-size: 0.95rem;
+    color: #666;
+}
+
+.app.dark .auth-toggle {
+    color: #ccc;
+}
+
+.auth-toggle span {
+    color: #007bff;
+    cursor: pointer;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.auth-toggle span:hover {
+    color: #0056b3;
+}

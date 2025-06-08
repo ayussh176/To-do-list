@@ -31,7 +31,7 @@ function NotesSection() {
     };
 
     const saveEdit = () => {
-        if (noteTitle.trim() === "" || noteContent.trim() === "") return; // Ensure content during edit
+        if (noteTitle.trim() === "" || noteContent.trim() === "") return;
         setNotes(notes.map(note =>
             note.id === editingNoteId
                 ? { ...note, title: noteTitle, content: noteContent, date: new Date().toLocaleString() }

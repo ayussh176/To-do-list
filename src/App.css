@@ -109,10 +109,17 @@ header {
   color: #ccc;
 }
 
-/* Home Page Specific Styles */
+.header-right { /* New style for the right side of header */
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+
+/* Home Page Specific Styles (Keep these if you plan to re-introduce HomePage) */
 .home-container {
   padding: 20px;
-  max-width: 1200px; /* Wider for home page content */
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -441,6 +448,10 @@ li span {
 
 .app.dark .task-date {
     color: lightgray;
+}
+
+.delete-task-button:hover {
+    color: #c82333;
 }
 
 /* Notes Section Specific Styles */
