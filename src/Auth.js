@@ -6,7 +6,7 @@ function Auth() {
     const emailRef = useRef();
     const passwordRef = useRef();
     const passwordConfirmRef = useRef();
-    const { signup, login, currentUser } = useAuth();
+    const { signup, login } = useAuth();
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const [isLogin, setIsLogin] = useState(true); // State to toggle between login and signup
