@@ -12,7 +12,7 @@
 - 📝 **Notes**: Save, edit, and delete personal notes
 - 📅 **Planner**: Schedule upcoming events with time and date
 - 🔐 **Authentication**: Secure login/logout (if implemented)
-- 🌗 **Dark Mode**: Toggle between light and dark themes
+- 🌗 **Dark Mode**: Toggle between light and dark
 - 📱 **Responsive Design**: Fully responsive for all screen sizes
 
 ---
